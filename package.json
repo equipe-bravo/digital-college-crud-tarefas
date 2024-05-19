@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "scripts": {
+    "start": "nodemon src/app.js"
+  },
+  "name": "digital-college-crud-tarefas",
+  "description": "Trabalho da Digital College da equipte bravo",
+  "version": "1.0.0",
+  "main": "app.js",
+  "keywords": [
+    "tasks"
+  ],
+  "author": "Levi, Igor, Fabiola, Fábio e David Amorim",
+  "license": "MIT"
+}
