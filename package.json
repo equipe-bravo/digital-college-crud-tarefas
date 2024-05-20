@@ -8,6 +8,7 @@
   "scripts": {
     "start": "nodemon src/app.js"
   },
+  "type": "module",
   "name": "digital-college-crud-tarefas",
   "description": "Trabalho da Digital College da equipte bravo",
   "version": "1.0.0",
