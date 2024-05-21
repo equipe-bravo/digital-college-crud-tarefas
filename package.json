@@ -1,12 +1,18 @@
 {
   "dependencies": {
-    "express": "^4.19.2"
+    "axios": "^1.7.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "json-server": "^1.0.0-beta.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
   },
   "scripts": {
-    "start": "nodemon src/app.js"
+    "start": "nodemon app.js",
+    "json-server": "json-server --watch db.json --port 5000"
   },
   "type": "module",
   "name": "digital-college-crud-tarefas",

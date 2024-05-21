@@ -1,0 +1,16 @@
+{
+    "users": [
+      { "id": 1, "username": "admin", "password": "$2a$10$EIXwX0oTF4F03OK5yBgDe.AeqZ.4U1T2p1P6sY7eJEmnWnLtgyU1K", "role": "admin" },
+      { "id": 2, "username": "user1", "password": "$2a$10$48YPd7Qb0N7RvQcb7psluum6c5QfKaAlPAiH6U1B9YQGJHTQFzEyu", "role": "user" }, 
+      { "id": 3, "username": "user2", "password": "$2a$10$B4.p9z8mTcOSftIpPmM30eOGo3X24/UnuD7E1M8Bj3Jg7E1t6/aUu", "role": "user" }, 
+      { "id": 4, "username": "user3", "password": "$2a$10$7C6wJWJQIQqHb7FVce7LZ.u2J92n/p.Xp5/JryYErWxWD3rUB.RIS", "role": "user" }, 
+      { "id": 5, "username": "user4", "password": "$2a$10$oqPV8U2mOXsE5lWqukeFke2FiQGc8teM1M8nvPTsyFMe9gTbG5QG2", "role": "user" }  
+    ],
+    "tasks": [
+      { "id": 1, "title": "Task 1", "description": "Description 1", "userId": 2 },
+      { "id": 2, "title": "Task 2", "description": "Description 2", "userId": 3 },
+      { "id": 3, "title": "Task 3", "description": "Description 3", "userId": 4 },
+      { "id": 4, "title": "Task 4", "description": "Description 4", "userId": 5 }
+    ]
+  }
+  
