@@ -3,6 +3,12 @@ class UserService {
     this.userRepository = userRepository;
   }
 
+  listAll = () => {
+    const usersList = this.userRepository.findAll();
+
+    return usersList;
+  };
+
   createUser = (postedData) => {
     const { username, email, password } = postedData;
     // TODO:
