@@ -20,6 +20,14 @@ class UserRepository {
     }
   };
 
+  findOneByEmail = (email) => {
+    // lógica
+
+    let storedUser;
+
+    return storedUser;
+  };
+
   save = (userData) => {
     let fileData = [];
     const filePath = "dados/users.json";

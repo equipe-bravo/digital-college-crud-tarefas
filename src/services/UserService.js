@@ -9,6 +9,12 @@ class UserService {
     return usersList;
   };
 
+  findOneByEmail = (email) => {
+    const storedUser = this.userRepository.findOneByEmail(email);
+
+    return storedUser;
+  };
+
   createUser = (postedData) => {
     const { username, email, password } = postedData;
     // TODO:
@@ -27,6 +33,15 @@ class UserService {
     const newUser = this.userRepository.save(validatedUserData);
 
     return newUser;
+  };
+
+  updateUser = (changeData, emailParam) => {
+    // encontrar storedUser buscando por email
+    // conferir se os valores de changeData estão em branco
+    // conferir se há um valor de changeData diferente de um valor de storedUser
+    // salvar os valores trocados e não trocados em uma variável
+    // deletar os antigos do user
+    // salvar os novos valores no arquivo JSON
   };
 }
 
