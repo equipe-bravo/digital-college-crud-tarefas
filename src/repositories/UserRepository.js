@@ -2,6 +2,24 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { dirname } from "path";
 
 class UserRepository {
+  findAll = () => {
+    const filePath = "dados/users.json";
+
+    try {
+      const fileData = readFileSync(filePath, "utf-8");
+      if (!fileData) {
+        return { msg: "Nenhum usuário cadastrado" };
+      }
+
+      const users = JSON.parse(fileData);
+
+      return users;
+    } catch (err) {
+      console.log("Erro ao tentar ler o arquivo");
+      return { msg: "Erro ao ler dados" };
+    }
+  };
+
   save = (userData) => {
     let fileData = [];
     const filePath = "dados/users.json";

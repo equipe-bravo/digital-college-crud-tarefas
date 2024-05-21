@@ -3,6 +3,12 @@ class UserController {
     this.userService = userService;
   }
 
+  listAll = (request, response) => {
+    const usersList = this.userService.listAll();
+
+    return response.status(200).json(usersList);
+  };
+
   createUser = (request, response) => {
     const postedData = request.body;
 
