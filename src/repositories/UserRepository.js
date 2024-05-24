@@ -21,11 +21,27 @@ class UserRepository {
   };
 
   findOneByEmail = (email) => {
-    // lógica
+    const filePath = "dados/users.json";
 
-    let storedUser;
+    try {
+      const fileData = readFileSync(filePath, "utf-8");
+      if (!fileData) {
+        return { msg: "Nenhum usuário cadastrado" };
+      }
 
-    return storedUser;
+      const users = JSON.parse(fileData);
+
+      const user = users.find((user) => user.email === email);
+
+      if (user) {
+        return user;
+      } else {
+        return { msg: "Usuário não encontrado" };
+      }
+    } catch (err) {
+      console.log("Erro ao tentar ler o arquivo");
+      return { msg: "Erro ao ler dados" };
+    }
   };
 
   save = (userData) => {
