@@ -11,6 +11,8 @@ const userService = new UserService(userRepository);
 const userController = new UserController(userService);
 
 userRoutes.get("", userController.listAll);
+userRoutes.get("/:email", userController.findOneByEmail);
 userRoutes.post("", userController.createUser);
+userRoutes.put("/:email", userController.updateUser);
 
 export default userRoutes;
