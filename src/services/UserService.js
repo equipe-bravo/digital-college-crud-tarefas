@@ -28,6 +28,7 @@ class UserService {
       username: username,
       email: email,
       password: password,
+      roles: ["user"],
     };
 
     const newUser = this.userRepository.save(validatedUserData);
