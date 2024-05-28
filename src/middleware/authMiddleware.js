@@ -7,6 +7,9 @@ function authMiddleware(request, response, next) {
     const token = request.headers.token;
     // TODO
     // return response quando não houver token
+    if (!token) {
+      return response.status(400).json({ msg: "Token não enviado" });
+    }
 
     const tokenValido = jwt.verify(token, key);
 

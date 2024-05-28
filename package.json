@@ -15,9 +15,6 @@
   "description": "Trabalho da Digital College da equipe bravo",
   "version": "1.0.0",
   "main": "app.js",
-  "keywords": [
-    "tasks"
-  ],
   "author": "Levi, Igor, Fabiola, Fábio e David Amorim",
   "license": "MIT"
 }

@@ -3,14 +3,15 @@ class TaskService {
     this.taskRepository = taskRepository;
   }
 
-  create = (taskPostedData, userEmail) => {
+  createTask = (taskPostedData, userEmail) => {
     const task = {
       title: taskPostedData.title,
+      description: taskPostedData.description,
+      status: taskPostedData.status,
       owner: userEmail,
     };
-    console.log(task);
 
-    return this.taskRepository.save(task);
+    return this.taskRepository.saveTask(task);
   };
 }
 

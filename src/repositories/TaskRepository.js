@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { dirname } from "path";
 
 class TaskRepostitory {
-  save = (taskData) => {
+  saveTask = (taskData) => {
     let fileData = [];
     const filePath = "dados/tasks.json";
 
@@ -22,7 +22,7 @@ class TaskRepostitory {
       writeFileSync(filePath, JSON.stringify(fileData, null, 2), "utf-8");
     } catch (error) {
       console.log(error);
-      return { msg: "erro no servidor" };
+      return { msg: error.message };
     }
 
     return taskData;

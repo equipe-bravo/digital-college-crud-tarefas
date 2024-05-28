@@ -3,14 +3,25 @@ class TaskController {
     this.taskService = taskService;
   }
 
-  create = (request, response) => {
+  listTasks = (reques, response) => {
+    // TODO
+  };
+
+  createTask = (request, response) => {
     const taskPostedData = request.body;
     const user = JSON.parse(request.headers.user);
-    console.log(user.email);
 
-    const task = this.taskService.create(taskPostedData, user.email);
+    const task = this.taskService.createTask(taskPostedData, user.email);
 
     return response.status(201).json(task);
+  };
+
+  updateTask = (reques, response) => {
+    // TODO
+  };
+
+  deleteTask = (reques, response) => {
+    // TODO
   };
 }
 

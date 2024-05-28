@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { dirname } from "path";
 
 class UserRepository {
-  findAll = () => {
+  findUsers = () => {
     const filePath = "dados/users.json";
 
     try {
@@ -20,29 +20,7 @@ class UserRepository {
     }
   };
 
-  findOneByEmail = (email) => {
-    const filePath = "dados/users.json";
-
-    try {
-      const fileData = readFileSync(filePath, "utf-8");
-      if (!fileData) {
-        throw new Error("Nenhum usuário cadastrado");
-      }
-
-      const users = JSON.parse(fileData);
-      const user = users.find((user) => user.email === email);
-
-      if (user) {
-        return user;
-      }
-    } catch (err) {
-      console.log("Erro ao tentar ler o arquivo");
-      throw new Error("Erro ao ler dados");
-    }
-    return;
-  };
-
-  save = (userData) => {
+  saveUser = (userData) => {
     let fileData = [];
     const filePath = "dados/users.json";
 
@@ -66,6 +44,28 @@ class UserRepository {
     }
 
     return userData;
+  };
+
+  findUserByEmail = (email) => {
+    const filePath = "dados/users.json";
+
+    try {
+      const fileData = readFileSync(filePath, "utf-8");
+      if (!fileData) {
+        throw new Error("Nenhum usuário cadastrado");
+      }
+
+      const users = JSON.parse(fileData);
+      const user = users.find((user) => user.email === email);
+
+      if (user) {
+        return user;
+      }
+    } catch (err) {
+      console.log("Erro ao tentar ler o arquivo");
+      throw new Error("Erro ao ler dados");
+    }
+    return;
   };
 }
 

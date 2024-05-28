@@ -7,23 +7,21 @@ class AuthService {
   }
 
   authenticate = (email, password) => {
-    const storedUser = this.userRepository.findOneByEmail(email);
+    const storedUser = this.userRepository.findUserByEmail(email);
     if (!storedUser) {
       console.log("email not found");
       return { payload: "", token: "" };
     }
 
-    // check password
     if (bcryptjs.compareSync(password, storedUser.password)) {
       const payload = {
         email: storedUser.email,
         roles: storedUser.roles,
-        exp: Math.floor(Date.now() / 1000) + 60 * 30, // token expira em 30 minutos
+        exp: Math.floor(Date.now() / 1000) + 60 * 60,
       };
 
       const chaveSecreta = "1";
 
-      // create token
       const token = jwt.sign(payload, chaveSecreta);
       console.log("new token created");
 

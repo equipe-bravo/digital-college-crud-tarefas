@@ -1,6 +1,6 @@
 # digital-college-crud-tarefas
 
-Primeiro Trabalho em Grupo da Digital College
+Trabalho da Equipe Bravo
 
 ## Descrição do Projeto
 
@@ -18,10 +18,10 @@ Node.js
 
 Se você deseja contribuir com este projeto, siga estas etapas:
 
-1. Crie uma branch para sua feature (`git checkout -b feature/NomeDaFeature`).
+1. Crie uma branch para sua feature (`git checkout -b nome-da-feature`).
 2. Commit suas mudanças (`git commit -m 'Adicionei uma nova feature'`).
-3. Dê push na sua branch (`git push origin feature/NomeDaFeature`).
-4. Abra um Pull Request.
+3. Dê push na sua branch (`git push origin nome-da-feature`).
+4. Abra um Pull Request para a branch develop.
 
 ## Autores
 

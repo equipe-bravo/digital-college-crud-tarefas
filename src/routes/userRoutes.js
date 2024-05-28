@@ -10,9 +10,11 @@ const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
 const userController = new UserController(userService);
 
-userRoutes.get("", userController.listAll);
-userRoutes.get("/:email", userController.findOneByEmail);
+userRoutes.get("", userController.listUsers);
 userRoutes.post("", userController.createUser);
 userRoutes.put("/:email", userController.updateUser);
+userRoutes.delete("/:email", userController.deleteUser);
+
+userRoutes.get("/:email", userController.findUserByEmail);
 
 export default userRoutes;
