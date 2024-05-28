@@ -26,22 +26,20 @@ class UserRepository {
     try {
       const fileData = readFileSync(filePath, "utf-8");
       if (!fileData) {
-        return { msg: "Nenhum usuário cadastrado" };
+        throw new Error("Nenhum usuário cadastrado");
       }
 
       const users = JSON.parse(fileData);
-
       const user = users.find((user) => user.email === email);
 
       if (user) {
         return user;
-      } else {
-        return { msg: "Usuário não encontrado" };
       }
     } catch (err) {
       console.log("Erro ao tentar ler o arquivo");
-      return { msg: "Erro ao ler dados" };
+      throw new Error("Erro ao ler dados");
     }
+    return;
   };
 
   save = (userData) => {

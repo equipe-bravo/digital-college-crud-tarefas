@@ -12,32 +12,52 @@ class UserService {
   };
 
   findOneByEmail = (email) => {
-    const storedUser = this.userRepository.findOneByEmail(email);
+    try {
+      const storedUser = this.userRepository.findOneByEmail(email);
 
-    return storedUser;
+      if (!storedUser) {
+        throw new Error("Usuário não encontrado");
+      }
+
+      return storedUser;
+    } catch (error) {
+      return { msg: error.message };
+    }
   };
 
   createUser = (postedData) => {
     const { username, email, password } = postedData;
-    // TODO:
-    // regra de email único
 
-    if (password.length < 6) {
-      return { msg: "senha deve ter no mínimo 6 caracteres" };
+    try {
+      // Regra de email único
+      const storedUser = this.userRepository.findOneByEmail(email);
+      if (storedUser) {
+        throw new Error("O email enviado já está em uso");
+      }
+
+      // Verificação de comprimento da senha
+      if (password.length < 6) {
+        throw new Error("A senha deve ter no mínimo 6 caracteres");
+      }
+
+      // Criptografia da senha
+      const hashPassword = bcryptjs.hashSync(password, 1);
+
+      const validatedUserData = {
+        username: username,
+        email: email,
+        password: hashPassword,
+        roles: ["user"],
+      };
+
+      // Salvar novo usuário
+      const newUser = this.userRepository.save(validatedUserData);
+
+      return newUser;
+    } catch (error) {
+      // Lidar com qualquer erro
+      return { msg: error.message };
     }
-
-    const hashPassword = bcryptjs.hashSync(password, 1);
-
-    const validatedUserData = {
-      username: username,
-      email: email,
-      password: hashPassword,
-      roles: ["user"],
-    };
-
-    const newUser = this.userRepository.save(validatedUserData);
-
-    return newUser;
   };
 
   updateUser = (changeData, emailParam) => {
