@@ -1,3 +1,5 @@
+import bcryptjs from "bcryptjs";
+
 class UserService {
   constructor(userRepository) {
     this.userRepository = userRepository;
@@ -24,10 +26,12 @@ class UserService {
       return { msg: "senha deve ter no mínimo 6 caracteres" };
     }
 
+    const hashPassword = bcryptjs.hashSync(password, 1);
+
     const validatedUserData = {
       username: username,
       email: email,
-      password: password,
+      password: hashPassword,
       roles: ["user"],
     };
 
