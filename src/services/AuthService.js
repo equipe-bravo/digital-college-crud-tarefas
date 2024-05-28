@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import bcryptjs from "bcryptjs";
 
 class AuthService {
   constructor(userRepository) {
@@ -13,7 +14,7 @@ class AuthService {
     }
 
     // check password
-    if (password === storedUser.password) {
+    if (bcryptjs.compareSync(password, storedUser.password)) {
       const payload = {
         email: storedUser.email,
         roles: storedUser.roles,

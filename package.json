@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2"
   },
@@ -11,7 +12,7 @@
   },
   "type": "module",
   "name": "digital-college-crud-tarefas",
-  "description": "Trabalho da Digital College da equipte bravo",
+  "description": "Trabalho da Digital College da equipe bravo",
   "version": "1.0.0",
   "main": "app.js",
   "keywords": [
