@@ -1,41 +1,33 @@
 import jwt from "jsonwebtoken";
 
+import AccessDeniedError from "../errors/AccessDeniedError.js";
+
 const key = "1";
 
 function roleMiddleware(request, response, next) {
-  try {
-    // Ler o token do cabeçalho da requisição
-    const token = request.headers.token;
+  const token = request.headers.token;
 
-    // Retornar resposta quando não houver token
-    if (!token) {
-      return response.status(400).json({ msg: "Token não enviado" });
+  if (!token) {
+    throw new AccessDeniedError("Token não foi enviado");
+  }
+
+  // Verificar o token
+  const tokenValido = jwt.verify(token, key);
+
+  if (tokenValido) {
+    // Autorização via role
+    if (tokenValido.roles && tokenValido.roles.includes("admin")) {
+      console.log("Autorização de admin");
+      next();
+    } else if (tokenValido.email === request.params.email) {
+      // Se o email do user no token for igual ao email no path da URL
+      console.log("Autorização por ser os recursos do próprio user");
+      next();
+    } else {
+      throw new AccessDeniedError(
+        "User não possui autorização para acessar o recurso"
+      );
     }
-
-    // Verificar o token
-    const tokenValido = jwt.verify(token, key);
-    console.log(tokenValido);
-
-    // Se o token for válido
-    if (tokenValido) {
-      // Se o token contiver o papel de administrador
-      if (tokenValido.roles && tokenValido.roles.includes("admin")) {
-        console.log("passou por admin");
-        return next();
-      }
-
-      // Se o email do usuário no token for igual ao email do usuário na requisição
-      if (tokenValido.email === request.params.email) {
-        console.log("passou por id");
-        return next();
-      }
-    }
-
-    // Se nenhuma das condições acima for atendida, retornar resposta não autorizada
-    return response.status(401).json({ msg: "Não autorizado" });
-  } catch (error) {
-    // Em caso de erro (ex.: token inválido ou expirado), retornar resposta não autorizada
-    return response.status(401).json({ msg: "Não autorizado" });
   }
 }
 

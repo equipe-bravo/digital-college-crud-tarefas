@@ -2,6 +2,21 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { dirname } from "path";
 
 class TaskRepostitory {
+  findTasks = () => {
+    const filePath = "dados/tasks.json";
+
+    try {
+      if (existsSync(filePath)) {
+        const existingData = readFileSync(filePath, "utf-8");
+        return existingData ? JSON.parse(existingData) : [];
+      } else {
+        return [];
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
   saveTask = (taskData) => {
     let fileData = [];
     const filePath = "dados/tasks.json";

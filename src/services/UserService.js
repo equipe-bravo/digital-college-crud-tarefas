@@ -1,5 +1,7 @@
 import bcryptjs from "bcryptjs";
 
+import BadRequestError from "../errors/BadRequestError.js";
+
 class UserService {
   constructor(userRepository) {
     this.userRepository = userRepository;
@@ -7,7 +9,6 @@ class UserService {
 
   listUsers = () => {
     const usersList = this.userRepository.findUsers();
-
     return usersList;
   };
 
@@ -17,11 +18,11 @@ class UserService {
     try {
       const storedUser = this.userRepository.findUserByEmail(email);
       if (storedUser) {
-        throw new Error("O email enviado já está em uso");
+        throw new BadRequestError("O email enviado já está em uso");
       }
 
       if (password.length < 6) {
-        throw new Error("A senha deve ter no mínimo 6 caracteres");
+        throw new BadRequestError("A senha deve ter no mínimo 6 caracteres");
       }
 
       const hashPassword = bcryptjs.hashSync(password, 1);
@@ -36,17 +37,28 @@ class UserService {
       const newUser = this.userRepository.saveUser(validatedUserData);
 
       return newUser;
-    } catch (error) {
-      return { msg: error.message };
+    } catch (err) {
+      throw err;
     }
   };
 
-  updateUser = (changeData, emailParam) => {
-    // TODO
+  updateUser = (email, updateUserData) => {
+    // Validar campos de updatedUserData (checar se os novos valores atendem as regras de negócio)
+
+    try {
+      const updatedUser = this.userRepository.updateUser(email, updateUserData);
+      return updatedUser;
+    } catch (err) {
+      throw err;
+    }
   };
 
-  deleteUser = (param) => {
-    // TODO
+  deleteUser = (email) => {
+    try {
+      return this.userRepository.deleteUser(email);
+    } catch (err) {
+      throw err;
+    }
   };
 
   findUserByEmail = (email) => {
@@ -54,12 +66,12 @@ class UserService {
       const storedUser = this.userRepository.findUserByEmail(email);
 
       if (!storedUser) {
-        throw new Error("Usuário não encontrado");
+        throw new BadRequestError("Nenhum user com esse email foi encontrado");
       }
 
       return storedUser;
-    } catch (error) {
-      return { msg: error.message };
+    } catch (err) {
+      throw err;
     }
   };
 }
