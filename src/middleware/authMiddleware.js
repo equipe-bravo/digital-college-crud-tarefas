@@ -16,8 +16,10 @@ function authMiddleware(request, response, next) {
     if (token && tokenValido) {
       next();
     }
+
+    return response.status(400).json({ msg: "token inválido" });
   } catch {
-    return response.status(401);
+    return response.status(401).json({ msg: "não autorizado" });
   }
 }
 

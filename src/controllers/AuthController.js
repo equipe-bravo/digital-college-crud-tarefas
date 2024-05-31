@@ -10,11 +10,10 @@ class AuthController {
       return response.sendStatus(400);
     }
 
-    const { payload, token } = this.authService.authenticate(email, password);
+    const token = this.authService.authenticate(email, password);
 
-    if (payload && token) {
+    if (token) {
       return response.send({
-        user: payload,
         auth: token,
       });
     } else {
