@@ -4,30 +4,48 @@ class UserController {
   }
 
   listUsers = (request, response) => {
-    const usersList = this.userService.listUsers();
-
-    return response.status(200).json(usersList);
+    try {
+      const usersList = this.userService.listUsers();
+      return response.status(200).json(usersList);
+    } catch (err) {
+      throw err;
+    }
   };
 
   createUser = (request, response) => {
-    const postedData = request.body;
+    try {
+      const postedUserData = request.body;
 
-    const newUser = this.userService.createUser(postedData);
+      const newUser = this.userService.createUser(postedUserData);
 
-    return response.status(201).json(newUser);
+      return response.status(201).json(newUser);
+    } catch (err) {
+      throw err;
+    }
   };
 
   updateUser = (request, response) => {
-    const emailParam = request.params.email;
-    const changeData = request.body;
+    const email = request.params.email;
+    const updateUserData = {
+      username: request.body.username,
+    };
 
-    const changedUser = this.userService.updateUser(changeData, emailParam);
-
-    return response.status(200).json(changedUser);
+    try {
+      const updatedUser = this.userService.updateUser(email, updateUserData);
+      return response.status(200).json(updatedUser);
+    } catch (err) {
+      throw err;
+    }
   };
 
   deleteUser = (request, response) => {
-    // TODO
+    const email = request.params.email;
+    try {
+      this.userService.deleteUser(email);
+      return response.status(204).json();
+    } catch (err) {
+      throw err;
+    }
   };
 
   findUserByEmail = (request, response) => {

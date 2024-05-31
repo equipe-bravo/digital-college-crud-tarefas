@@ -1,26 +1,36 @@
+import jwt from "jsonwebtoken";
+
 class TaskController {
   constructor(taskService) {
     this.taskService = taskService;
   }
 
-  listTasks = (reques, response) => {
-    // TODO
+  listTasks = (request, response) => {
+    try {
+      return response.status(200).json(this.taskService.listTasks());
+    } catch (err) {
+      throw err;
+    }
   };
 
   createTask = (request, response) => {
-    const taskPostedData = request.body;
-    const user = JSON.parse(request.headers.user);
+    try {
+      const taskPostedData = request.body;
+      const { email } = jwt.decode(request.headers.token);
 
-    const task = this.taskService.createTask(taskPostedData, user.email);
+      const task = this.taskService.createTask(taskPostedData, email);
 
-    return response.status(201).json(task);
+      return response.status(201).json(task);
+    } catch (err) {
+      throw err;
+    }
   };
 
-  updateTask = (reques, response) => {
+  updateTask = (request, response) => {
     // TODO
   };
 
-  deleteTask = (reques, response) => {
+  deleteTask = (request, response) => {
     // TODO
   };
 }
