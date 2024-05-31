@@ -6,17 +6,24 @@ class TaskController {
   }
 
   listTasks = (request, response) => {
-    // TODO
+    try {
+      return response.status(200).json(this.taskService.listTasks());
+    } catch (err) {
+      throw err;
+    }
   };
 
   createTask = (request, response) => {
-    const taskPostedData = request.body;
+    try {
+      const taskPostedData = request.body;
+      const { email } = jwt.decode(request.headers.token);
 
-    const { email } = jwt.decode(request.headers.token);
+      const task = this.taskService.createTask(taskPostedData, email);
 
-    const task = this.taskService.createTask(taskPostedData, email);
-
-    return response.status(201).json(task);
+      return response.status(201).json(task);
+    } catch (err) {
+      throw err;
+    }
   };
 
   updateTask = (request, response) => {

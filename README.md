@@ -1,18 +1,14 @@
-# digital-college-crud-tarefas
+# Trabalho da Equipe Bravo
 
-Trabalho da Equipe Bravo
+## TODO
+
+- Atualizar tasks ao atualizar um user.
+- Aplicar paginação ao listar users.
+- Adicionar filtros de busca na rota listar users.
 
 ## Descrição do Projeto
 
 Backend para gerenciar usuários e tarefas com operações CRUD e um sistema de permissões utilizando JWT para autenticação e autorização.
-
-## Instruções de Instalação
-
-## Instruções de Uso
-
-## Tecnologias Utilizadas
-
-Node.js
 
 ## Contribuição
 
