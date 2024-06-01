@@ -40,6 +40,7 @@ class UserController {
 
   deleteUser = (request, response) => {
     const email = request.params.email;
+
     try {
       this.userService.deleteUser(email);
       return response.status(204).json();
